@@ -1,6 +1,12 @@
 package edu.mscd.cs.javaln.syslog;
 
-import java.util.logging.*;
+import java.util.logging.ErrorManager;
+import java.util.logging.Filter;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
 
 public abstract class SyslogHandler extends Handler {
     protected static boolean open = true;

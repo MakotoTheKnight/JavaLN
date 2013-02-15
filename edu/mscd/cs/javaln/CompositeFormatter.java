@@ -2,7 +2,12 @@ package edu.mscd.cs.javaln;
 
 import java.util.Enumeration;
 import java.util.Vector;
-import java.util.logging.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public class CompositeFormatter extends Formatter {
     Vector formatters = new Vector();

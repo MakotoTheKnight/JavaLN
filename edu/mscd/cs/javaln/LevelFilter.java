@@ -2,7 +2,12 @@ package edu.mscd.cs.javaln;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.logging.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Filter;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 /**
  * Print only message from a set of levels, not all greater than some

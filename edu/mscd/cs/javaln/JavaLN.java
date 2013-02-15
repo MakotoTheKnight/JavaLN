@@ -1,6 +1,10 @@
 package edu.mscd.cs.javaln;
 
-import java.util.logging.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 // http://www.docjar.com/html/api/java/util/logging/Logger.java.html
 
