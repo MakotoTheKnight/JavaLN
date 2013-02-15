@@ -1,15 +1,16 @@
 package edu.mscd.cs.javaln;
 
-import java.io.*;
-import java.util.logging.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
-public class MethodFilter extends SetFilter
-{
-    public MethodFilter ()
-    {
+public class MethodFilter extends SetFilter {
+    public MethodFilter() {
         super();
-        add (LogManager.getLogManager().getProperty
-            ("edu.mscd.cs.javaln.MethodFilter.names"));
+        add(LogManager.getLogManager().getProperty
+                ("edu.mscd.cs.javaln.MethodFilter.names"));
     }
 
     /**
@@ -17,42 +18,39 @@ public class MethodFilter extends SetFilter
      * "edu.mscd.cs.javaln.MethodFilter.names" and the String passed to it,
      * both of which it takes to be a comma separated list of class names.
      */
-    public MethodFilter (String methods)
-    {
+    public MethodFilter(String methods) {
         this();
-        add (methods);
-    };
-
-    public boolean isLoggable (LogRecord rec)
-    {
-        return (isLoggable (rec.getSourceClassName() + "." +
-            rec.getSourceMethodName()));
+        add(methods);
     }
 
-    public static void main (String args[])
-    {
+    public boolean isLoggable(LogRecord rec) {
+        return (isLoggable(rec.getSourceClassName() + "." +
+                rec.getSourceMethodName()));
+    }
+
+    public static void main(String args[]) {
         // this filter works with all loggers
-        Logger logger = Logger.getLogger ("global");
+        Logger logger = Logger.getLogger("global");
 
         ConsoleHandler ch = new ConsoleHandler();
-        ch.setLevel (Level.ALL);
-        logger.addHandler (ch);
-        logger.setUseParentHandlers (false);
-        logger.setLevel (Level.ALL);
+        ch.setLevel(Level.ALL);
+        logger.addHandler(ch);
+        logger.setUseParentHandlers(false);
+        logger.setLevel(Level.ALL);
 
         // these should display
         MethodFilter mf =
-            new MethodFilter ("edu.mscd.cs.javaln.MethodFilter.main");
-        System.out.println (mf);
-        logger.setFilter (mf);
-        logger.info ("info");
-        logger.severe ("severe");
+                new MethodFilter("edu.mscd.cs.javaln.MethodFilter.main");
+        System.out.println(mf);
+        logger.setFilter(mf);
+        logger.info("info");
+        logger.severe("severe");
 
         // this shouldn't
-        mf = new MethodFilter ("dont.log.this.one");
-        System.out.println (mf);
-        logger.setFilter (mf);
-        logger.info ("info");
-        logger.severe ("severe");
+        mf = new MethodFilter("dont.log.this.one");
+        System.out.println(mf);
+        logger.setFilter(mf);
+        logger.info("info");
+        logger.severe("severe");
     }
 }

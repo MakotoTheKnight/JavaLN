@@ -1,7 +1,10 @@
 package edu.mscd.cs.javaln;
 
-import java.io.*;
-import java.util.logging.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 /**
  * Print only the message, not the time, level, etc.
@@ -26,27 +29,26 @@ import java.util.logging.*;
  * <hr>
  */
 
-public class NullFormatter extends Formatter
-{
-    public NullFormatter() { super(); }
-
-    public String format (LogRecord rec)
-    {
-        return (formatMessage(rec) + System.getProperty ("line.separator"));
+public class NullFormatter extends Formatter {
+    public NullFormatter() {
+        super();
     }
 
-    public static void main (String args[])
-    {
+    public String format(LogRecord rec) {
+        return (formatMessage(rec) + System.getProperty("line.separator"));
+    }
+
+    public static void main(String args[]) {
         ConsoleHandler ch = new ConsoleHandler();
-        ch.setFormatter (new NullFormatter());
-        ch.setLevel (Level.FINEST);
+        ch.setFormatter(new NullFormatter());
+        ch.setLevel(Level.FINEST);
 
-        Logger logger = Logger.getLogger ("global");
-        logger.addHandler (ch);
-        logger.setUseParentHandlers (false);
-        logger.setLevel (Level.FINEST);
+        Logger logger = Logger.getLogger("global");
+        logger.addHandler(ch);
+        logger.setUseParentHandlers(false);
+        logger.setLevel(Level.FINEST);
 
-        logger.severe ("this is a test");
-        logger.finest ("this is another");
+        logger.severe("this is a test");
+        logger.finest("this is another");
     }
 }

@@ -2,14 +2,16 @@ package edu.mscd.cs.javaln.syslog;
 
 // http://www.faqs.org/rfcs/rfc3164.html
 
-import java.util.logging.*;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
 
 /**
  * Format a message so that it is acceptable to syslogd.
  */
 
-public abstract class SyslogFormatter extends Formatter
-{
+public abstract class SyslogFormatter extends Formatter {
     private final static int Emergency = 0;
     private final static int Alert = 1;
     private final static int Critical = 2;
@@ -42,25 +44,22 @@ public abstract class SyslogFormatter extends Formatter
 
     protected int facility = User;
 
-    public SyslogFormatter ()
-    {
+    public SyslogFormatter() {
         super();
 
         String f = LogManager.getLogManager().
-            getProperty (getClass().getName() + ".facility");
+                getProperty(getClass().getName() + ".facility");
 
         if (f != null)
-            facility = mapFacility (f);
+            facility = mapFacility(f);
     }
 
-    public SyslogFormatter (int facility)
-    {
+    public SyslogFormatter(int facility) {
         super();
         this.facility = facility;
     }
 
-    protected static int mapLevel (Level level)
-    {
+    protected static int mapLevel(Level level) {
         // these really don't match up well...
         if (level == Level.SEVERE) return (Emergency);
         if (level == Level.WARNING) return (Alert);
@@ -72,38 +71,36 @@ public abstract class SyslogFormatter extends Formatter
         return (Debug);
     }
 
-    protected int mapFacility (String facility)
-    {
-        if (facility.equalsIgnoreCase ("Kern")) return (0);
-        if (facility.equalsIgnoreCase ("User")) return (1);
-        if (facility.equalsIgnoreCase ("Mail")) return (2);
-        if (facility.equalsIgnoreCase ("Daemon")) return (3);
-        if (facility.equalsIgnoreCase ("Auth")) return (4);
-        if (facility.equalsIgnoreCase ("Syslog")) return (5);
-        if (facility.equalsIgnoreCase ("LPR")) return (6);
-        if (facility.equalsIgnoreCase ("News")) return (7);
-        if (facility.equalsIgnoreCase ("UUCP")) return (8);
-        if (facility.equalsIgnoreCase ("Cron")) return (9);
-        if (facility.equalsIgnoreCase ("Authpriv")) return (10);
-        if (facility.equalsIgnoreCase ("FTP")) return (11);
-        if (facility.equalsIgnoreCase ("Local0")) return (16);
-        if (facility.equalsIgnoreCase ("Local1")) return (17);
-        if (facility.equalsIgnoreCase ("Local2")) return (18);
-        if (facility.equalsIgnoreCase ("Local3")) return (19);
-        if (facility.equalsIgnoreCase ("Local4")) return (20);
-        if (facility.equalsIgnoreCase ("Local5")) return (21);
-        if (facility.equalsIgnoreCase ("Local6")) return (22);
-        if (facility.equalsIgnoreCase ("Local7")) return (23);
+    protected int mapFacility(String facility) {
+        if (facility.equalsIgnoreCase("Kern")) return (0);
+        if (facility.equalsIgnoreCase("User")) return (1);
+        if (facility.equalsIgnoreCase("Mail")) return (2);
+        if (facility.equalsIgnoreCase("Daemon")) return (3);
+        if (facility.equalsIgnoreCase("Auth")) return (4);
+        if (facility.equalsIgnoreCase("Syslog")) return (5);
+        if (facility.equalsIgnoreCase("LPR")) return (6);
+        if (facility.equalsIgnoreCase("News")) return (7);
+        if (facility.equalsIgnoreCase("UUCP")) return (8);
+        if (facility.equalsIgnoreCase("Cron")) return (9);
+        if (facility.equalsIgnoreCase("Authpriv")) return (10);
+        if (facility.equalsIgnoreCase("FTP")) return (11);
+        if (facility.equalsIgnoreCase("Local0")) return (16);
+        if (facility.equalsIgnoreCase("Local1")) return (17);
+        if (facility.equalsIgnoreCase("Local2")) return (18);
+        if (facility.equalsIgnoreCase("Local3")) return (19);
+        if (facility.equalsIgnoreCase("Local4")) return (20);
+        if (facility.equalsIgnoreCase("Local5")) return (21);
+        if (facility.equalsIgnoreCase("Local6")) return (22);
+        if (facility.equalsIgnoreCase("Local7")) return (23);
         return (1);
     }
 
-    public abstract String getPrefix (int level);
+    public abstract String getPrefix(int level);
 
-    public String format (LogRecord rec)
-    {
-        String ret = getPrefix (mapLevel (rec.getLevel())) + " "
-            + rec.getSourceClassName() + " " + rec.getSourceMethodName() + " "
-            + rec.getLevel() + ": " + formatMessage (rec);
+    public String format(LogRecord rec) {
+        String ret = getPrefix(mapLevel(rec.getLevel())) + " "
+                + rec.getSourceClassName() + " " + rec.getSourceMethodName() + " "
+                + rec.getLevel() + ": " + formatMessage(rec);
         return (ret);
     }
 }
