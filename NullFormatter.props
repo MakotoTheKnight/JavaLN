@@ -1,0 +1,7 @@
+# see also the system's logging.properties file
+
+.level = FINEST
+handlers = java.util.logging.ConsoleHandler
+java.util.logging.ConsoleHandler.level = FINEST
+java.util.logging.ConsoleHandler.formatter = \
+	edu.mscd.cs.javaln.NullFormatter
