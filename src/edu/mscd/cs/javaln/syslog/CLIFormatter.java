@@ -2,8 +2,6 @@ package edu.mscd.cs.javaln.syslog;
 
 // http://www.faqs.org/rfcs/rfc3164.html
 
-import edu.mscd.cs.javaln.Constants;
-
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
@@ -46,7 +44,7 @@ public class CLIFormatter extends SyslogFormatter {
         System.out.println(clif.format
                 (new LogRecord(Level.FINEST, "finest")));
 
-        clif = new CLIFormatter(Constants.KERN);
+        clif = new CLIFormatter(Facility.KERN);
         System.out.println(clif.format
                 (new LogRecord(Level.SEVERE, "severe")));
         System.out.println(clif.format

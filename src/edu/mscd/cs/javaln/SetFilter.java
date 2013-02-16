@@ -51,15 +51,6 @@ abstract class SetFilter implements Filter {
     }
 
     protected boolean isLoggable(String s) {
-        /*
-        System.out.println ("s = " + s);
-        for (Iterator i = set.iterator(); i.hasNext() ;)
-        {
-            String l = (String) i.next();
-            System.out.println ("l = " + l);
-            System.out.println ("l.equals = " + l.equals (s));
-        }
-        */
         return (set.contains(s));
     }
 }

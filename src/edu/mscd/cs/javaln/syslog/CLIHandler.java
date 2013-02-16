@@ -12,7 +12,6 @@ public class CLIHandler extends SyslogHandler {
 
     protected synchronized void sendMessage(String message) {
         String exec = "logger " + message;
-        // System.out.println ("CLIStream exec " + exec);
 
         try {
             Runtime.getRuntime().exec(exec);

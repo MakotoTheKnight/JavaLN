@@ -37,7 +37,7 @@ public class SyslogdFormatter extends SyslogFormatter {
      * @return a string formatted for the "logger" command
      */
     public String getPrefix(int level) {
-        int i = facility.getFacilityValue() * 8 + level;
+        int i = facility * 8 + level;
         String ret = "<" + i + ">" + getDate();
         return (ret);
     }
